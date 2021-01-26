@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- encoding: utf-8 -*-
 
-import time
+import time, datetime
 from pyModbusTCP.client import ModbusClient
 from pyModbusTCP import utils
 hosts = ["10.11.0.14","10.10.254.2","10.11.0.2"] # Meter, IPC (NAT), IPC (Local)
@@ -44,7 +44,7 @@ except:
     c.close()
 
 #Once both connections are made, the main loop can run
-if sel and c: print("Beginning main loop..."
+if sel and c: print("Beginning main loop...")
 while True:
     try:
         start = datetime.datetime.now()

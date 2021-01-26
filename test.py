@@ -29,24 +29,26 @@ try:
     while sel.open():
         try:
             ia = sel.read_input_registers(350,2)
-            print("IA is",float(ia[1]/100))
+            print("IA is",float(ia[1]/100),"Amps")
             ib = sel.read_input_registers(352,2)
-            print("IB is",float(ib[1]/100))
+            print("IB is",float(ib[1]/100),"Amps")
             ic = sel.read_input_registers(354,2)
-            print("IC is",float(ic[1]/100),"\n")
+            print("IC is",float(ic[1]/100),"Amps\n")
             w3 = sel.read_input_registers(370,2)
-            print("W3 is",float(w3[1]/100))
+            print("W3 is",float(w3[1]/100),"kW")
             u3 = sel.read_input_registers(372,2)
-            print("U3 is",float(u3[1]/100))
+            print("U3 is",float(u3[1]/100),"kVA")
             q3 = sel.read_input_registers(374,2)
-            print("Q3 is",float(q3[1]/100),"\n")
+            print("Q3 is",float(q3[1]/100),"kVAR\n")
             time.sleep(2)
-        except Exception as e: print("NOPE",e)
+        except Exception as e: 
+            print("NOPE",e)
+            sel.close()
 except: 
     print("Aborting")
-    c.close()
+    sel.close()
 print("Disconnecting from meter")
-c.close()
+sel.close()
 '''
 try:
     print("Connecting using Float Client...")
