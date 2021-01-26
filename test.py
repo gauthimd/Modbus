@@ -20,31 +20,40 @@ class FloatModbusClient(ModbusClient):   #This class was needed to allow writing
         b32_1 = [utils.encode_ieee(f) for f in floats_list]
         b16_1 = utils.long_list_to_word(b32_1)
         return self.write_multiple_registers(address, b16_1)
-'''
 try:
     print("Connecting to SEL Meter...")
+    #c = FloatModbusClient(host = hosts[0], port = ports[0], auto_open=True)
+    #if c: print("Connection made...")
     sel = ModbusClient(host=hosts[0], port=ports[0], auto_open=True)
-    if sel.open():
-        print("Connected to SEL!")
-    else:
-        print("Error connecting to SEL Meter")
+    if sel:print("Connected!")
+    while sel.open():
+        try:
+            ia = sel.read_input_registers(350,2)
+            print("IA is",float(ia[1]/100))
+            ib = sel.read_input_registers(352,2)
+            print("IB is",float(ib[1]/100))
+            ic = sel.read_input_registers(354,2)
+            print("IC is",float(ic[1]/100),"\n")
+            w3 = sel.read_input_registers(370,2)
+            print("W3 is",float(w3[1]/100))
+            u3 = sel.read_input_registers(372,2)
+            print("U3 is",float(u3[1]/100))
+            q3 = sel.read_input_registers(374,2)
+            print("Q3 is",float(q3[1]/100),"\n")
+            time.sleep(2)
+        except Exception as e: print("NOPE",e)
 except: 
-    print("Error connecting to SEL Meter")
     print("Aborting")
-    sel.close()
-if not sel.host(hosts[0]):
-    print("Host error")
-if not sel.port(ports[0]):
-    print("Port error")
+    c.close()
 print("Disconnecting from meter")
-sel.close()
+c.close()
 '''
 try:
     print("Connecting using Float Client...")
     c = FloatModbusClient(host = hosts[1], port = ports[1], auto_open=True)
     if c: print("Connection made...")
-    time.sleep(2)
     c.write_float(174,[0.0])
     c.close()
     print("Register written ")
 except Exception as e: print(e)
+'''
