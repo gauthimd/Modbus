@@ -48,11 +48,11 @@ if sel and c: print("Beginning main loop...")
 while True:
     try:
         start = datetime.datetime.now()
-        w = sel.read_input_registers(370,2)
-        w3 = -1*float(w[1]/100)
-        c.write_float(174,[w3])
+        w3 = sel.read_input_registers(370,2)
+        W3 = -1*int('0b'+bin(w3[0])[2:]+bin(w3[1])[2:],2)/100.0
+        c.write_float(174,[W3])
         end = datetime.datetime.now()
-        print("W3 is",w3,"\n","Time delta is",end - start,"secs")
+        print("W3 is",W3,"\n","Time delta is",end - start,"secs")
     except Exception as e: print("Somethings jacked",e)
 sel.close()
 c.close()

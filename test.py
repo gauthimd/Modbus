@@ -22,14 +22,12 @@ class FloatModbusClient(ModbusClient):   #This class was needed to allow writing
         return self.write_multiple_registers(address, b16_1)
 try:
     print("Connecting to SEL Meter...")
-    #c = FloatModbusClient(host = hosts[0], port = ports[0], auto_open=True)
-    #if c: print("Connection made...")
     sel = ModbusClient(host=hosts[0], port=ports[0], auto_open=True)
     if sel:print("Connected!")
     while sel.open():
         try:
             ia = sel.read_input_registers(350,2)
-            print(ia)
+            #print(ia)
             IA = int('0b'+bin(ia[0])[2:]+bin(ia[1])[2:],2)/100.0
             print("IA is",IA,"Amps")
             ib = sel.read_input_registers(352,2)
@@ -40,13 +38,15 @@ try:
             print("IC is",IC,"Amps")
             w3 = sel.read_input_registers(370,2)
             W3 = int('0b'+bin(w3[0])[2:]+bin(w3[1])[2:],2)/100.0
-            print("W3 is",W3,"kW")
+            print("W3 is",W3,"kW\n")
+            '''
             u3 = sel.read_input_registers(372,2)
             U3 = int('0b'+bin(u3[0])[2:]+bin(u3[1])[2:],2)/100.0
             print("U3 is",U3,"kVA")
             q3 = sel.read_input_registers(374,2)
             Q3 = int('0b'+bin(q3[0])[2:]+bin(q3[1])[2:],2)/100.0
             print("Q3 is",Q3,"kVAR\n")
+            '''
             time.sleep(2)
         except Exception as e: 
             print("NOPE",e)
