@@ -49,7 +49,7 @@ while True:
     try:
         start = datetime.datetime.now()
         w3 = sel.read_input_registers(370,2)
-        W3 = -1*int('0b'+bin(w3[0])[2:]+bin(w3[1])[2:],2)/100.0
+        W3 = -1*int('0b'+bin(w3[0])[2:]+bin(w3[1])[2:].zfill(16),2)/100.0
         c.write_float(174,[W3])
         end = datetime.datetime.now()
         print("W3 is",W3,"\n","Time delta is",end - start,"secs")

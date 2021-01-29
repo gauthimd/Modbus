@@ -15,7 +15,8 @@ try:
     if sel:print("Connected!")
     while sel.open():
         try:
-            ia = sel.read_input_registers(350,2)
+            #ia = sel.read_input_registers(350,2)
+            ia = [0,14]
             print(ia)
             x = bin(ia[1])[2:].zfill(16)
             print(x,type(x))
