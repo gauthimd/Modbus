@@ -36,9 +36,9 @@ except:
 
 #Second, open a connection to the IPC modbus server
 try:
-    print("Connecting using Float Client...")
+    print("Connecting to IPC using Float Client...")
     c = FloatModbusClient(host=hosts[1], port=ports[1], auto_open=True)
-    if c: print("Connection made...")
+    if c: print("Connected to IPC!")
 except:
     print("Error connecting to IPC...")
     c.close()
@@ -51,6 +51,7 @@ while True:
         w3 = sel.read_input_registers(370,2)
         W3 = -1*int('0b'+bin(w3[0])[2:]+bin(w3[1])[2:].zfill(16),2)/100.0
         c.write_float(174,[W3])
+        print("W3 is",W3,"\n")
         time.sleep(1)
         #end = datetime.datetime.now()
         #print("W3 is",W3,"\n","Time delta is",end - start,"secs")
