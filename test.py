@@ -28,16 +28,16 @@ try:
         try:
             ia = sel.read_input_registers(350,2)
             #print(ia)
-            IA = int('0b'+bin(ia[0])[2:]+bin(ia[1])[2:],2)/100.0
+            IA = int('0b'+bin(ia[0])[2:]+bin(ia[1])[2:].zfill(16),2)/100.0
             print("IA is",IA,"Amps")
             ib = sel.read_input_registers(352,2)
-            IB = int('0b'+bin(ib[0])[2:]+bin(ib[1])[2:],2)/100.0
+            IB = int('0b'+bin(ib[0])[2:]+bin(ib[1])[2:].zfill(16),2)/100.0
             print("IB is",IB,"Amps")
             ic = sel.read_input_registers(354,2)
-            IC = int('0b'+bin(ic[0])[2:]+bin(ic[1])[2:],2)/100.0
+            IC = int('0b'+bin(ic[0])[2:]+bin(ic[1])[2:].zfill(16),2)/100.0
             print("IC is",IC,"Amps")
             w3 = sel.read_input_registers(370,2)
-            W3 = int('0b'+bin(w3[0])[2:]+bin(w3[1])[2:],2)/100.0
+            W3 = int('0b'+bin(w3[0])[2:]+bin(w3[1])[2:].zfill(16),2)/100.0
             print("W3 is",W3,"kW\n")
             '''
             u3 = sel.read_input_registers(372,2)
